@@ -892,7 +892,7 @@ class Translate:
 
         return lisq
 
-    def Eng_Hindi_Transliteration(self, d, a):
+    def eng_hindi_tansliteration(self, d, a):
         lis = sorted(d.items(), key=lambda kv: kv[1], reverse=True)
         sorted_lis = []
         for i in lis:
@@ -906,7 +906,7 @@ class Translate:
 
         return sorted_lis
 
-    def ch_English(self, a):
+    def database_search_english(self, a):
         a = a.capitalize()
 
         try:
@@ -914,13 +914,13 @@ class Translate:
             Try to find the word in the database, if it does not exists directly call algorithm function
             """
             possible_match = EnglishToHindiTranslation.objects.filter(english__exact=a).first()
-            if len(possible_match.hindi) > 1:
+            if len(possible_match.hindi) >= 1:
                 possible_match_dict = possible_match.hindi
                 possible_match_dict = sorted(possible_match_dict.items(), key=lambda item: item[1], reverse=True)
                 highest_match = next(iter(possible_match_dict))
                 temp_dict = dict()
                 temp_dict[highest_match[0]] = highest_match[1]
-                sorted_list = self.Eng_Hindi_Transliteration(temp_dict, a)
+                sorted_list = self.eng_hindi_tansliteration(temp_dict, a)
                 return sorted_list
             else:
                 return self.hin_translate(a)
@@ -940,7 +940,7 @@ class Translate:
     def convert(self, words: str):
         applied_filter_list = self.split_sort(words)
         for word in applied_filter_list:
-            translated_word = self.ch_English(word)
+            translated_word = self.database_search_english(word)
             if translated_word:
                 translated_word = translated_word[0]
 

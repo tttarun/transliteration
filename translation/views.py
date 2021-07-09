@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework import mixins, viewsets, views
 from .models import Endpoint, MLAlgorithm, MLRequest, EnglishToHindiTranslation
 from .serializers import MLAlgorithmSerializer, EndpointSerializer, MLRequestSerializer, PersonDataSerialzer
-from .machine_learning_models.ENGLISH import Translate
+from .machine_learning_models.translate_model import Translate
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 

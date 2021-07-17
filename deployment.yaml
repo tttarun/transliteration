@@ -38,6 +38,9 @@ spec:
         - name: saral-translation
           image: saral-translation
           imagePullPolicy: Never
+          env:
+            - name: X_API_KEY
+              value:
 
 ---
 
@@ -70,7 +73,7 @@ spec:
     - host: saral-translation.com
       http:
         paths:
-          - path: /v1/?(.*)
+          - path: /?(.*)
             backend:
               serviceName: saral-translation-service
               servicePort: 8000

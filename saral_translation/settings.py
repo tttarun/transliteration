@@ -84,15 +84,15 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'saral-translation',
+        'NAME': os.environ.get('DB_NAME'),
 
-        'USER': 'postgres',
+        'USER': os.environ.get('DB_USER'),
 
-        'PASSWORD': 'awesome33',
+        'PASSWORD': os.environ.get('DB_PASS'),
 
-        'HOST': 'localhost',
+        'HOST': os.environ.get('DB_HOST'),
 
-        'PORT': '5432',
+        'PORT': os.environ.get('DB_PORT'),
 
     }
 }

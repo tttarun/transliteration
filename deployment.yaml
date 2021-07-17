@@ -1,0 +1,72 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: saral-translation
+#spec:
+#  selector:
+#    matchLabels:
+#      app: saral-translation
+#  replicas: 3
+#  template:
+#    metadata:
+#      labels:
+#        app: saral-translation
+#    spec:
+#      containers:
+#        - name: saral-translation
+#          image: saral-translation
+#          imagePullPolicy: IfNotPresent
+#          ports:
+#            - containerPort: 5000
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: saral-translation-ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: saral-translation.com
+      http:
+        paths:
+          - path /v1/?(.*)
+            backend:
+              serviceName: saral-translation-service
+              servicePort: 8000
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saral-translation-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: saral-translation
+  template:
+    metadata:
+      name: saral-translation-pod
+      labels:
+        app: saral-translation
+    spec:
+      containers:
+        - name: saral-translation
+          image: saral-translation
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: saral-translation-service
+spec:
+  type: ClusterIP
+  selector:
+    app: saral-translation
+    ports:
+      port: 8000
+      targetPort: 8000

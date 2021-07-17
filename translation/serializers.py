@@ -27,9 +27,9 @@ class MLRequestSerializer(serializers.ModelSerializer):
 
 
 class PersonDataSerialzer(serializers.Serializer):
-    full_name = serializers.CharField(max_length=1024)
-    address = serializers.CharField(max_length=2048,allow_blank=True,allow_null=True)
-    relation_name = serializers.CharField(max_length=1024, allow_blank=True,allow_null=True)
+    full_name = serializers.CharField(max_length=1024,allow_blank=True,required=False)
+    full_address = serializers.CharField(max_length=2048,allow_blank=True,allow_null=True,required=False)
+    relation_name = serializers.CharField(max_length=1024, allow_blank=True,allow_null=True,required=False)
 
 
 

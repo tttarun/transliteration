@@ -914,7 +914,7 @@ class Translate:
             Try to find the word in the database, if it does not exists directly call algorithm function
             """
             possible_match = EnglishToHindiTranslation.objects.filter(english__exact=a).first()
-            if len(possible_match.hindi) >= 1:
+            if possible_match is not None:
                 possible_match_dict = possible_match.hindi
                 possible_match_dict = sorted(possible_match_dict.items(), key=lambda item: item[1], reverse=True)
                 highest_match = next(iter(possible_match_dict))

@@ -6,6 +6,7 @@ from .models import Endpoint, MLAlgorithm, MLRequest, EnglishToHindiTranslation
 from .serializers import MLAlgorithmSerializer, EndpointSerializer, MLRequestSerializer, PersonDataSerialzer
 from .machine_learning_models.translate_model import Translate
 from rest_framework.response import Response
+from .authentication import APIAuthentication
 from django.shortcuts import get_object_or_404
 
 
@@ -14,19 +15,24 @@ from django.shortcuts import get_object_or_404
 class EndpointView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Endpoint.objects.all()
     serializer_class = EndpointSerializer
+    authentication_classes = (APIAuthentication,)
 
 
 class MLAlgoirthmView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = MLAlgorithm.objects.all()
     serializer_class = MLAlgorithmSerializer
+    authentication_classes = (APIAuthentication,)
 
 
 class MLRequestView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet, mixins.UpdateModelMixin):
     queryset = MLRequest.objects.all()
     serializer_class = MLRequestSerializer
+    authentication_classes = (APIAuthentication,)
 
 
 class TranslateView(views.APIView):
+    # authentication_classes = (APIAuthentication,)
+
     def post(self, request, endpoint):
         algorithm = MLAlgorithm.objects.filter(parent_endpoint__name__iexact=endpoint).first()
         if not algorithm:

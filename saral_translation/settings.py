@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-
+from decouple import config
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 # import django
 #
@@ -25,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$7&@-)xo=nm+*c_7ol-05+kcd84*dlb7j(f_&7d-iyi@6d(2b0'
+SECRET_KEY = "CQ!GNl'Gi.&cz*4]Ebq8V^=1>J*zI'5&$/AuMjoO>_Dr29U/mT,?Fpr!vf)UFK"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -137,3 +137,12 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'translation.authentication.APIAuthentication',
+#     ]
+# }
+
+MEDIA_ROOT = '/vol/web/media'
+STATIC_ROOT = '/vol/web/static'

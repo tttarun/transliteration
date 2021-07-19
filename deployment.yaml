@@ -1,24 +1,3 @@
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  name: saral-translation
-#spec:
-#  selector:
-#    matchLabels:
-#      app: saral-translation
-#  replicas: 3
-#  template:
-#    metadata:
-#      labels:
-#        app: saral-translation
-#    spec:
-#      containers:
-#        - name: saral-translation
-#          image: saral-translation
-#          imagePullPolicy: IfNotPresent
-#          ports:
-#            - containerPort: 5000
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,7 +19,51 @@ spec:
           imagePullPolicy: Never
           env:
             - name: X_API_KEY
-              value:
+              valueFrom:
+                secretKeyRef:
+                  name: saral-translation-secret
+                  key: x-api-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: saral-translation-secret
+                  key: secret-key
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: translation-db-creds
+                  key: db-name
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: translation-db-creds
+                  key: host
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: translation-db-creds
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: translation-db-creds
+                  key: password
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: translation-db-creds
+                  key: port
+            - name: SUPERUSER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: translation-secret
+                  key: superuser-username
+            - name: SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: translation-secret
+                  key: supeuser-password
+
 
 ---
 

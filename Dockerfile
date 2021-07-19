@@ -5,9 +5,10 @@ RUN pip install -r /requirements.txt
 RUN mkdir /saral_translation
 WORKDIR /saral_translation
 RUN mkdir ./saral_translation
-COPY ./saral_translation ./saral_translation
-RUN mkdir ./translation
-COPY ./translation ./translation
+#COPY ./saral_translation ./saral_translation
+#RUN mkdir ./translation
+#COPY ./translation ./translation
+COPY . /saral_translation
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
 RUN adduser user

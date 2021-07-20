@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 
 class APIAuthentication(authentication.BaseAuthentication):
+    """Authenticates on the basis of API key"""
     def authenticate_header(self, request):
         api_key = request.headers.get('X-API-KEY', None)
         if api_key is None:

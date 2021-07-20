@@ -13,26 +13,29 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 class EndpointView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    """View to get all the available endpoints"""
     queryset = Endpoint.objects.all()
     serializer_class = EndpointSerializer
     authentication_classes = (APIAuthentication,)
 
 
 class MLAlgoirthmView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    """View to get all the available algorithms"""
     queryset = MLAlgorithm.objects.all()
     serializer_class = MLAlgorithmSerializer
     authentication_classes = (APIAuthentication,)
 
 
 class MLRequestView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet, mixins.UpdateModelMixin):
+    """View to get all the successful request history"""
     queryset = MLRequest.objects.all()
     serializer_class = MLRequestSerializer
     authentication_classes = (APIAuthentication,)
 
 
 class TranslateView(views.APIView):
-    # authentication_classes = (APIAuthentication,)
-
+    """View to get the translation from english to hindi"""
+    authentication_classes = (APIAuthentication,)
     def post(self, request, endpoint):
         algorithm = MLAlgorithm.objects.filter(parent_endpoint__name__iexact=endpoint).first()
         if not algorithm:

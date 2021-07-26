@@ -132,7 +132,7 @@ metadata:
   namespace: translation-backend-staging
 spec:
   rules:
-    - host: saral-translation-staging.com
+    - host: saral-translation-staging
       http:
         paths:
           - path: /?(.*)

@@ -117,30 +117,4 @@ spec:
   selector:
     app: translation-staging
   sessionAffinity: None
-  type: NodePort
-
-
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata: 
-  name: translation-staging-ingress
-  namespace: translation-backend
-  annotations: 
-    nginx.ingress.kubernetes.io/use-regex: "true"
-spec: 
-  rules: 
-    - 
-      host: saral-translation-staging.com
-      http: 
-        paths: 
-          - 
-            backend: 
-              service: 
-                name: translation-staging-service
-                port: 
-                  number: 80
-            path: /?(.*)
-            pathType: ImplementationSpecific
+  type: LoadBalancer

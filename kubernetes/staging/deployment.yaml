@@ -35,25 +35,23 @@ type: Opaque
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: saral-translation-deployment
+ labels:
+    app: translation-staging
+  name: translation-staging
   namespace: translation-backend-staging
-  labels:
-    app: saral-translation-staging
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: saral-translation-staging
+      app: translation-staging
   template:
     metadata:
-      name: saral-translation-pod
       labels:
-        app: saral-translation-staging
+        app: translation-staging
     spec:
       containers:
-        - name: saral-translation
-          image: saral-translation
-          imagePullPolicy: Never
+        - image: gcr.io/bjp-saral/github.com/jarvisconsulting/saral-translation
+          name: translation-staging-deployment
           env:
             - name: X_API_KEY
               valueFrom:
@@ -107,16 +105,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: saral-translation-service-staging
+  label:
+    app: translation-staging
+  name: translation-staging-service
   namespace: translation-backend-staging
 spec:
-  type: ClusterIP
-  selector:
-    app: saral-translation-staging
   ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: translation-staging
+  sessionAffinity: None
+  type: NodePort
 
 
 
@@ -125,11 +126,10 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: 
+  name: translation-staging-ingress
+  namespace: translation-backend-staging
   annotations: 
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
-  name: saral-translation-ingress-service-staging
-  namespace: translation-ingress-staging
 spec: 
   rules: 
     - 
@@ -139,8 +139,8 @@ spec:
           - 
             backend: 
               service: 
-                name: saral-translation-service-staging
+                name: translation-staging-service
                 port: 
-                  number: 8000
+                  number: 80
             path: /?(.*)
             pathType: ImplementationSpecific

@@ -124,19 +124,23 @@ spec:
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata:
+metadata: 
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
   name: saral-translation-ingress-service-staging
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
   namespace: translation-backend-staging
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: saral-translation-service-staging
-              port:
-                number: 8000
+spec: 
+  rules: 
+    - 
+      host: saral-translation-staging.com
+      http: 
+        paths: 
+          - 
+            backend: 
+              service: 
+                name: saral-translation-service-staging
+                port: 
+                  number: 8000
+            path: /?(.*)
+            pathType: ImplementationSpecific

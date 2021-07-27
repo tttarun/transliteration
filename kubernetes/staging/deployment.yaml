@@ -4,13 +4,13 @@ metadata:
   labels:
     app: translation
     tier: backend
-  name: translation-backend-staging
+  name: translation-backend
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: translation-db-creds
-  namespace: translation-backend-staging
+  namespace: translation-backend
 type: Opaque
 data:
   username: cG9zdGdyZXM=
@@ -28,7 +28,7 @@ data:
 kind: Secret
 metadata:
   name: saral-translation-secret
-  namespace: translation-backend-staging
+  namespace: translation-backend
 type: Opaque
 
 ---
@@ -36,9 +36,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
  labels:
-    app: translation-staging
-  name: translation-staging
-  namespace: translation-backend-staging
+   app: translation-staging
+ name: translation-staging
+ namespace: translation-backend
 spec:
   replicas: 2
   selector:
@@ -108,7 +108,7 @@ metadata:
   label:
     app: translation-staging
   name: translation-staging-service
-  namespace: translation-backend-staging
+  namespace: translation-backend
 spec:
   ports:
     - port: 80
@@ -127,7 +127,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: 
   name: translation-staging-ingress
-  namespace: translation-backend-staging
+  namespace: translation-backend
   annotations: 
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec: 

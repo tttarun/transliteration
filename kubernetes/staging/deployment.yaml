@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app: translation
+    app: translation-staging
     tier: backend
   name: translation-backend
   

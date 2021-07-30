@@ -68,7 +68,7 @@ substitutions:
   _K8S_LABELS: ''
   _IMAGE_NAME: gcr.io/bjp-saral/github.com/jarvisconsulting/saral-translation
   _DOCKERFILE_NAME: Dockerfile
-  _K8S_NAMESPACE: saral-translation
+  _K8S_NAMESPACE: translation-backend
   _K8S_YAML_PATH: kubernetes/staging/
   _GKE_LOCATION: asia-south1-c
 tags:

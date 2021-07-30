@@ -113,7 +113,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  label:
+  labels:
     app: translation-staging
   name: translation-staging-service
   namespace: translation-backend

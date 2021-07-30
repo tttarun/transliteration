@@ -5,7 +5,7 @@ RUN pip install -r /requirements.txt
 RUN mkdir /saral_translation
 WORKDIR /saral_translation
 COPY . /saral_translation
-# create directory...
+# create directory.
 RUN mkdir -p /vol/web/
 RUN adduser --disabled-password --gecos '' user
 RUN chown -R user:user /vol/

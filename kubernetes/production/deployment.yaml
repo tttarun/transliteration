@@ -58,7 +58,13 @@ spec:
         - image: gcr.io/bjp-saral/github.com/jarvisconsulting/saral-translation
           imagePullPolicy: IfNotPresent
           name: saral-translation-deployment
-          resources: {}
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 4Gi
+            requests:
+              cpu: 1000m
+              memory: 2Gi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           env:
@@ -107,7 +113,9 @@ spec:
                 secretKeyRef:
                   name: saral-translation-secret
                   key: supeuser-password
-
+      nodeSelector:
+        nodefor: prod-deployments
+      restartPolicy: Always
 ---
 
 apiVersion: v1

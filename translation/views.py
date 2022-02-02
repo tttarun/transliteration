@@ -2,12 +2,17 @@ import json
 
 from django.shortcuts import render
 from rest_framework import mixins, viewsets, views
+from rest_framework.templatetags.rest_framework import data
+
 from .models import Endpoint, MLAlgorithm, MLRequest, EnglishToHindiTranslation
 from .serializers import MLAlgorithmSerializer, EndpointSerializer, MLRequestSerializer, PersonDataSerialzer
 from .machine_learning_models.translate_model import Translate
 from rest_framework.response import Response
 from .authentication import APIAuthentication
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView  # for api
+from rest_framework import viewsets
+from rest_framework import status
 
 
 # Create your views here.
@@ -58,3 +63,32 @@ class TranslateView(views.APIView):
             return Response(data)
         else:
             return Response({'message': 'Invalid data'}, status=400)
+
+
+class translateAPIView(APIView):
+
+    def get(self, request, given_string):
+        translate_obj = Translate()
+        translate_string = translate_obj.convert(given_string)
+        # serializers = serializers(translate_string, many=True)
+        return Response(translate_string)
+
+    def post(self, request):
+        pass
+
+
+class SearchAndUpdateAPIView(APIView):
+
+    def post(self, request):
+
+        data = request.data
+
+        for key in data:
+            record = EnglishToHindiTranslation.objects.filter(english__iexact=key).first()
+            if record:
+                record.hindi = data[key]
+                record.save()
+            else:
+                add_new = EnglishToHindiTranslation.objects.create(english=key, hindi=data[key])
+
+        return Response({'status': 'Success', 'Success': 'Successfully'}, status=200)

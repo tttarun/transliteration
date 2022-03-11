@@ -10,6 +10,7 @@ class Endpoint(models.Model):
         owner: String with owner name
         created_at: DateTime when the endpoint was created
     """
+
     name = models.CharField(max_length=256)
     owner = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,6 +31,7 @@ class MLAlgorithm(models.Model):
         created_at: The date when MLAlgorithm was added.
         parent_endpoint: The reference to the Endpoint.
     """
+
     name = models.CharField(max_length=128)
     description = models.TextField(max_length=1024)
     code = models.CharField(max_length=600000)
@@ -53,6 +55,7 @@ class MLRequest(models.Model):
         created_at: The date when request was created.
         parent_mlalgorithm: The reference to MLAlgorithm used to compute response
     """
+
     input_data = models.CharField(max_length=20000)
     full_response = models.CharField(max_length=20000)
     response = models.CharField(max_length=20000)
@@ -72,8 +75,18 @@ class EnglishToHindiTranslation(models.Model):
         english: The key/ word to be translated
         hindi: The value with all possible options of translation in json format
     """
+
     english = models.CharField(max_length=255)
     hindi = models.JSONField(blank=True)
 
     def __str__(self):
         return self.english
+
+
+class myuploadfile(models.Model):
+    f_name = models.CharField(max_length=255)
+    uploaded_file = models.FileField(upload_to="")
+    translated_file = models.FileField(upload_to="")
+
+    def __str__(self):
+        return self.f_name

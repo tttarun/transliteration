@@ -1,6 +1,29 @@
 {% extends 'translation/base.html' %}
 {% block title %}Home{% endblock %}
 
+{% block style %}
+ .loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+{% endblock %}
+
 
 {% block main_content %}
 <div class="container">
@@ -22,23 +45,15 @@
         <div class="maia-aux">
             <center>
                 <ul>
-                    <a href="/">
-                        <li style="color:white">Home</li>
-                    </a>
+                    <a href="/"><li style="color:white">Home</li></a>
                     <span class="tab"></span>
-                    <a href="/">
-                        <li style="color:white">Try it out
-                        </li>
-                    </a>
+                    <a href="/"><li style="color:white">Try it out
+                    </li></a>
                     <span class="tab"></span>
-                    <a href="/">
-                        <li style="color:white">On Translation
-                        </li>
-                    </a>
+                    <a href="/"><li style="color:white">On Translation
+                    </li></a>
                     <span class="tab"></span>
-                    <a href="/">
-                        <li style="color:white">On Translation Services</li>
-                    </a>
+                    <a href="/"><li style="color:white">On Translation Services</li></a>
                 </ul>
             </center>
         </div>
@@ -47,33 +62,29 @@
     <hr>
     <div class="editor-toolbar">
         <div class="editor-langs goog-inline-block goog-menu-button" id="gt-sl" tabindex="0" role="listbox"
-            aria-expanded="false" aria-haspopup="true" style="user-select: none;" aria-activedescendant=":g3">
+             aria-expanded="false" aria-haspopup="true" style="user-select: none;" aria-activedescendant=":g3">
             <div class="goog-inline-block goog-menu-button-outer-box">
                 <div class="goog-inline-block goog-menu-button-inner-box">
                     <div class="goog-inline-block goog-menu-button-caption" id=":g3" role="option" aria-selected="true"
-                        aria-setsize="131" aria-posinset="44">
+                         aria-setsize="131" aria-posinset="44">
                         <center>English to Hindi Transliteration</center>
                     </div>
                     <div class="goog-inline-block goog-menu-button-dropdown">&nbsp;</div>
                 </div>
             </div>
         </div>
-        <span class="editor-methods" id="itaControl">
-            <div><span class="ita-kd-inputtools-div">
-                    <div class="goog-container goog-container-vertical" tabindex="-1" style="user-select: none;"><a
-                            class="ita-kd-icon-button ita-kd-inputtool-icon ita-kd-small ita-kd-left ita-kd-selected"
-                            role="button" tabindex="0" aria-label="Turn off Input Method" aria-pressed="true"
-                            style="user-select: none;"><span class="ita-kd-img ita-kd-icon ita-kd-icon-span ita-icon-5"
-                                style="user-select: none;"></span></a><a
-                            class="ita-kd-icon-button ita-kd-dropdown ita-kd-right" role="button" tabindex="0"
-                            aria-haspopup="true" aria-label="Show the Input Tools menu" style="user-select: none;"><span
-                                class="ita-kd-img ita-kd-arrow ita-kd-icon-span" style="user-select: none;"></span></a>
-                    </div>
-                </span></div>
-        </span>
+        <span class="editor-methods" id="itaControl"><div><span class="ita-kd-inputtools-div"><div
+                class="goog-container goog-container-vertical" tabindex="-1" style="user-select: none;"><a
+                class="ita-kd-icon-button ita-kd-inputtool-icon ita-kd-small ita-kd-left ita-kd-selected" role="button"
+                tabindex="0" aria-label="Turn off Input Method" aria-pressed="true" style="user-select: none;"><span
+                class="ita-kd-img ita-kd-icon ita-kd-icon-span ita-icon-5" style="user-select: none;"></span></a><a
+                class="ita-kd-icon-button ita-kd-dropdown ita-kd-right" role="button" tabindex="0" aria-haspopup="true"
+                aria-label="Show the Input Tools menu" style="user-select: none;"><span
+                class="ita-kd-img ita-kd-arrow ita-kd-icon-span"
+                style="user-select: none;"></span></a></div></span></div></span>
 
         <div class="goog-inline-block goog-flat-menu-button goog-flag-menu-button-focus" id="editor-cp-button"
-            tabindex="0">
+             tabindex="0">
             <div class="editor-cp-img"></div>
             <center>Write here</center>
         </div>
@@ -84,24 +95,56 @@
     <!--</form>-->
     <div class="container">
         <center><textarea id="translation_area" placeholder="यहाँ टाइप करें ... (e.g Aap kasai hai)"
-                style="line-height: 1.5em; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
+                          style="line-height: 1.5em; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
         </center>
 
-        <div id="hindi_words_list" style="position:absolute"></div>
+        <div  id="hindi_words_list" style="position:absolute">
+        </div>
+<!--        ;left: 450px; top: 235px;-->
 
-        <h1 id="head"></h1>
+
     </div>
 
 
 </div>
 
-<center>
+ <center>
     <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data">
-        <input type="text" name="filename" placeholder="enter your file name">
-        <input type="file" multiple name="uploadfiles">
+        <input type="text" name="filename"  placeholder="enter your file name" >
+        <input type="file" multiple name="uploadfiles" >
         {% csrf_token %}
-        <button type="submit">Upload File</button>
+        <button class="btn btn-primary" type="submit" onclick="submit_button()">Upload File</button>
     </form>
-</center>
+ </center>
+
+
+<center><div id="lll" class="loader" style="display:none"></div></center>
+
+
+<!-- <center>-->
+<!--    <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data">-->
+
+<!--           <div class="form-group">-->
+<!--      <label for="focusedInput">Focused</label>-->
+<!--&lt;!&ndash;      <input class="form-control" id="focusedInput" type="text">&ndash;&gt;-->
+<!--               <input class="form-control" id="focusedInput" type="text" name="filename"  placeholder="enter your file name" width="48" height="48" >-->
+<!--    </div>-->
+<!--        <input type="file" multiple name="uploadfiles" >-->
+<!--        {% csrf_token %}-->
+<!--        <button class="btn btn-primary" type="submit">Upload File</button>-->
+<!--    </form>-->
+<!-- </center>-->
+
+
+
+
+
 
 {% endblock %}
+
+
+
+
+
+
+

@@ -85,7 +85,7 @@ class EnglishToHindiTranslation(models.Model):
 
 class myuploadfile(models.Model):
     f_name = models.CharField(max_length=255)
-    uploaded_file = models.FileField(upload_to="")
+    uploaded_file = models.FileField(upload_to="",blank=False,null=False)
     translated_file = models.FileField(upload_to="")
 
     def __str__(self):

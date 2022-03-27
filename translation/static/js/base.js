@@ -11,6 +11,7 @@ var st,e,l;
 
 translation_area.addEventListener('keyup',function translate(e) {
     document.getElementById('hindi_words_list').style.display='none';
+    var flag=true;
     if(e.keyCode == 32){
 
         let text_value = translation_area.value;
@@ -119,12 +120,12 @@ translation_area.addEventListener('keyup',function translate(e) {
         const textarea = document.getElementById('translation_area');
         textarea.value = replaceRange(textarea.value, gs-l.length, gs, dict[l][0]+' ');
         window.el=dict[l][0].length
-
-
+        console.log("value is " + event.target.value)
 
         var dropdown = document.getElementById("translation_options_dropdown");
         dropdown.focus();
         dropdown.size = dropdown.options.length;
+
 
         if (eng_len>list[1].length)
         {
@@ -133,14 +134,21 @@ translation_area.addEventListener('keyup',function translate(e) {
         {
         gs=gs-(list[1].length-eng_len);
         }
+
+        var text = $(this).val(),
+        key = event.which || event.keyCode || event.charCode;
+
+        if(key == 8){
+        var text_focus = document.getElementById("translation_area");
+        text_focus.focus();
+        }
+
+
 }catch(err)
 {
 
 }
-
-
-        }
-
+}
 
 });
 
@@ -200,17 +208,64 @@ function replaceRange(s, start, end, substitute) {
 };
 
 
-//let submit_button = document.getElementById("submit_button");
-//
-//submit_button.addEventListener('onclick',function() {
-//document.getElementById('lll').style.display='none';
-//}
-//);
+const input = document.getElementById('fileUpload');
+const btnUpload = document.getElementById("btnUpload");
+//var filename=document.getElementById('filename').value;
+//console.log(filename)
 
-function submit_button()
-{
-document.getElementById("lll").style.display='block';
+btnUpload.addEventListener("click", function(){
+//input.addEventListener('change', () => {
+    uploadFile(input.files[0]);
+    document.getElementById('lll').style.display='block';
+
+});
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
+const csrftoken = getCookie('csrftoken');
+
+const uploadFile = (file) => {
+
+    // add file to FormData object
+    const fd = new FormData();
+    fd.append('f_name','filename');
+    fd.append('uploaded_file', file);
+    // send `POST` request
+    fetch('/upload', {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        body: fd,
+
+    })
+    .then(res => res.json())
+    .then(data =>
+    {
+    document.getElementById('lll').style.display='none';
+    }
+    )
+    .catch(err => console.error(err));
+};
+
+
+
+
+
+
+
 
 
 

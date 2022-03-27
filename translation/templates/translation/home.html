@@ -2,25 +2,25 @@
 {% block title %}Home{% endblock %}
 
 {% block style %}
- .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+.loader {
+border: 16px solid #f3f3f3;
+border-radius: 50%;
+border-top: 16px solid #3498db;
+width: 120px;
+height: 120px;
+-webkit-animation: spin 2s linear infinite; /* Safari */
+animation: spin 2s linear infinite;
 }
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
 {% endblock %}
 
@@ -45,15 +45,23 @@
         <div class="maia-aux">
             <center>
                 <ul>
-                    <a href="/"><li style="color:white">Home</li></a>
+                    <a href="/">
+                        <li style="color:white">Home</li>
+                    </a>
                     <span class="tab"></span>
-                    <a href="/"><li style="color:white">Try it out
-                    </li></a>
+                    <a href="/">
+                        <li style="color:white">Try it out
+                        </li>
+                    </a>
                     <span class="tab"></span>
-                    <a href="/"><li style="color:white">On Translation
-                    </li></a>
+                    <a href="/">
+                        <li style="color:white">On Translation
+                        </li>
+                    </a>
                     <span class="tab"></span>
-                    <a href="/"><li style="color:white">On Translation Services</li></a>
+                    <a href="/">
+                        <li style="color:white">On Translation Services</li>
+                    </a>
                 </ul>
             </center>
         </div>
@@ -95,12 +103,12 @@
     <!--</form>-->
     <div class="container">
         <center><textarea id="translation_area" placeholder="यहाँ टाइप करें ... (e.g Aap kasai hai)"
-                          style="line-height: 1.5em; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
+                          style="line-height: 1.5em; height: 300px ;font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
         </center>
 
-        <div  id="hindi_words_list" style="position:absolute">
+        <div id="hindi_words_list" style="position:absolute">
         </div>
-<!--        ;left: 450px; top: 235px;-->
+        <!--        ;left: 450px; top: 235px;-->
 
 
     </div>
@@ -108,18 +116,53 @@
 
 </div>
 
- <center>
-    <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data">
-        <input type="text" name="filename"  placeholder="enter your file name" >
-        <input type="file" multiple name="uploadfiles" >
-        {% csrf_token %}
-        <button class="btn btn-primary" type="submit" onclick="submit_button()">Upload File</button>
-    </form>
- </center>
+<!--<input id="csrf-token" value="{% csrf_token %}">-->
+<center>
+    <input type="file" id="fileUpload">
+    <button id="btnUpload">Upload Files</button>
+</center>
 
 
 <center><div id="lll" class="loader" style="display:none"></div></center>
 
+
+
+
+
+<!--<form>-->
+<!--    <div>-->
+<!--        <label>Select the File to Upload</label>-->
+<!--        <input type="file">-->
+<!--    </div>-->
+<!--    {% csrf_token %}-->
+<!--    <button type="submit">Convert</button>-->
+<!--</form>-->
+
+
+<!--<form id="cv_form" style="display: block;" enctype="multipart/form-data">-->
+<!--    <input id="uploadCV" type="file" name="file"/>-->
+<!--    <button type="submit" id="upload_btn">upload</button>-->
+<!--</form>-->
+
+<!-- <center>-->
+<!--    <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data" onsubmit="submit_button()">-->
+<!--        <input required type="text" name="filename"  placeholder="enter your file name" >-->
+<!--        <input required type="file" name="uploadfiles" >-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <button class="btn btn-primary" type="submit">Convert File</button>-->
+<!--    </form>-->
+<!-- </center>-->
+
+<!--<center><div id="lll" class="loader" style="display:none"></div></center>-->
+
+
+<!--<br>-->
+<!--<div class="container">-->
+<!--<div class="progress" style="height:20px">-->
+<!--  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>-->
+<!--</div>-->
+<!--    </div>-->
 
 <!-- <center>-->
 <!--    <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data">-->
@@ -134,10 +177,6 @@
 <!--        <button class="btn btn-primary" type="submit">Upload File</button>-->
 <!--    </form>-->
 <!-- </center>-->
-
-
-
-
 
 
 {% endblock %}

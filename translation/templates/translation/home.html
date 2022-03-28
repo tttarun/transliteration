@@ -2,6 +2,11 @@
 {% block title %}Home{% endblock %}
 
 {% block style %}
+
+body {
+  background-color: #E6E6FA;
+}
+
 .loader {
 border: 16px solid #f3f3f3;
 border-radius: 50%;
@@ -117,66 +122,15 @@ animation: spin 2s linear infinite;
 </div>
 
 <!--<input id="csrf-token" value="{% csrf_token %}">-->
+<div id="ll">
 <center>
-    <input type="file" id="fileUpload">
-    <button id="btnUpload">Upload Files</button>
+    <input required type="file" id="fileUpload">
+    <button id="btnUpload" class="btn btn-primary">Upload Files</button>
 </center>
+</div>
 
 
 <center><div id="lll" class="loader" style="display:none"></div></center>
-
-
-
-
-
-<!--<form>-->
-<!--    <div>-->
-<!--        <label>Select the File to Upload</label>-->
-<!--        <input type="file">-->
-<!--    </div>-->
-<!--    {% csrf_token %}-->
-<!--    <button type="submit">Convert</button>-->
-<!--</form>-->
-
-
-<!--<form id="cv_form" style="display: block;" enctype="multipart/form-data">-->
-<!--    <input id="uploadCV" type="file" name="file"/>-->
-<!--    <button type="submit" id="upload_btn">upload</button>-->
-<!--</form>-->
-
-<!-- <center>-->
-<!--    <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data" onsubmit="submit_button()">-->
-<!--        <input required type="text" name="filename"  placeholder="enter your file name" >-->
-<!--        <input required type="file" name="uploadfiles" >-->
-<!--        {% csrf_token %}-->
-<!--        {{ form.as_p }}-->
-<!--        <button class="btn btn-primary" type="submit">Convert File</button>-->
-<!--    </form>-->
-<!-- </center>-->
-
-<!--<center><div id="lll" class="loader" style="display:none"></div></center>-->
-
-
-<!--<br>-->
-<!--<div class="container">-->
-<!--<div class="progress" style="height:20px">-->
-<!--  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>-->
-<!--</div>-->
-<!--    </div>-->
-
-<!-- <center>-->
-<!--    <form action="{% url 'uploads' %}" method="POST" enctype="multipart/form-data">-->
-
-<!--           <div class="form-group">-->
-<!--      <label for="focusedInput">Focused</label>-->
-<!--&lt;!&ndash;      <input class="form-control" id="focusedInput" type="text">&ndash;&gt;-->
-<!--               <input class="form-control" id="focusedInput" type="text" name="filename"  placeholder="enter your file name" width="48" height="48" >-->
-<!--    </div>-->
-<!--        <input type="file" multiple name="uploadfiles" >-->
-<!--        {% csrf_token %}-->
-<!--        <button class="btn btn-primary" type="submit">Upload File</button>-->
-<!--    </form>-->
-<!-- </center>-->
 
 
 {% endblock %}

@@ -249,12 +249,24 @@ const uploadFile = (file) => {
         method: 'POST',
         headers: {'X-CSRFToken': csrftoken},
         body: fd,
+        responseType: 'blob',
 
     })
-    .then(res => res.json())
+    .then(res => res.blob())
     .then(data =>
     {
+    console.log(data)
+
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(data);
+    a.download = "translated_file";
+    a.click();
     document.getElementById('lll').style.display='none';
+    window.location.reload();
+//    document.getElementById('fileUpload').value= null;
+//    document.elementFromPoint('100px','100px').click();
+//       document.getElementById("ll").innerHTML.window.location.reload();
+
     }
     )
     .catch(err => console.error(err));

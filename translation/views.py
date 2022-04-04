@@ -39,6 +39,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.core.files import File
 from .forms import MyuploadfileForm
 from django.core.cache import cache
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -118,47 +119,99 @@ class TranslateView(views.APIView):
             return Response({"message": "Invalid data"}, status=400)
 
 
+
 class TranslateStringView(views.APIView):
 
     def get(self, request):
         word = request.query_params.get('query')
         # print(word) # in word we are getting english word
-        possible_match = EnglishToHindiTranslation.objects.filter(english__iexact=word).first()
-        # print(possible_match)
         data = {}
-        if possible_match is not None and possible_match.hindi != {}:
-            data = possible_match.hindi  #{'संदिप': 61, 'संदीप': 9615, 'सन्दीप': 414} getting this as data for every word
-            # print(data)
-            for i in data:
-                # print(i) # in data[i] we are getting score and in i we are getting word
-                if isinstance(data[i], int):
-                    ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
-                    score=data[i]
-                    data[i] = {'manual': False, 'score': score, 'time': ind_time}
-            if len(data) < 5:
+        if cache.get(word):
+            data=cache.get(word)
+
+            # print(possible_match)
+        else:
+            possible_match = EnglishToHindiTranslation.objects.filter(english__iexact=word).first()
+            if possible_match is not None and possible_match.hindi != {}:
+                data = possible_match.hindi  #{'संदिप': 61, 'संदीप': 9615, 'सन्दीप': 414} getting this as data for every word
+                # print(data)
+                for i in data:
+                    # print(i) # in data[i] we are getting score and in i we are getting word
+                    if isinstance(data[i], int):
+                        ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
+                        score=data[i]
+                        data[i] = {'manual': False, 'score': score, 'time': ind_time}
+                if len(data) < 5:
+                    translate_obj = Translate()
+                    converted_word_array = translate_obj.hin_translate(word)
+                    for i in converted_word_array:
+                        if len(data) >= 5:
+                            break
+                        if i in data.keys():
+                            continue
+                        else:
+                            data.__setitem__(i, {'manual': False, 'score': 10, 'time': ind_time})
+
+            else:
                 translate_obj = Translate()
                 converted_word_array = translate_obj.hin_translate(word)
-                for i in converted_word_array:
+
+                for i in range(len(converted_word_array)):
                     if len(data) >= 5:
                         break
-                    if i in data.keys():
-                        continue
-                    else:
-                        data.__setitem__(i, {'manual': False, 'score': 10, 'time': ind_time})
+                    ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
+                    data.__setitem__(converted_word_array[i], {'manual': False, 'score': 10, 'time': ind_time})
 
-        else:
-            translate_obj = Translate()
-            converted_word_array = translate_obj.hin_translate(word)
-
-            for i in range(len(converted_word_array)):
-                if len(data) >= 5:
-                    break
-                ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
-                data.__setitem__(converted_word_array[i], {'manual': False, 'score': 10, 'time': ind_time})
-
-        data = sorted(data, key=lambda x: (data[x]['manual'], data[x]['score'], data[x]['time']),reverse=True)
-
+            data = sorted(data, key=lambda x: (data[x]['manual'], data[x]['score'], data[x]['time']),reverse=True)
+            cache.add(word,data)
         return Response({'status': 'Success', 'data': data}, status=200)
+
+
+
+
+
+
+# class TranslateStringView(views.APIView):
+#
+#     def get(self, request):
+#         word = request.query_params.get('query')
+#         # print(word) # in word we are getting english word
+#         possible_match = EnglishToHindiTranslation.objects.select_related(english__iexact=word).first()
+#         # print(possible_match)
+#         data = {}
+#         if possible_match is not None and possible_match.hindi != {}:
+#             data = possible_match.hindi  #{'संदिप': 61, 'संदीप': 9615, 'सन्दीप': 414} getting this as data for every word
+#             # print(data)
+#             for i in data:
+#                 # print(i) # in data[i] we are getting score and in i we are getting word
+#                 if isinstance(data[i], int):
+#                     ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
+#                     score=data[i]
+#                     data[i] = {'manual': False, 'score': score, 'time': ind_time}
+#             if len(data) < 5:
+#                 translate_obj = Translate()
+#                 converted_word_array = translate_obj.hin_translate(word)
+#                 for i in converted_word_array:
+#                     if len(data) >= 5:
+#                         break
+#                     if i in data.keys():
+#                         continue
+#                     else:
+#                         data.__setitem__(i, {'manual': False, 'score': 10, 'time': ind_time})
+#
+#         else:
+#             translate_obj = Translate()
+#             converted_word_array = translate_obj.hin_translate(word)
+#
+#             for i in range(len(converted_word_array)):
+#                 if len(data) >= 5:
+#                     break
+#                 ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
+#                 data.__setitem__(converted_word_array[i], {'manual': False, 'score': 10, 'time': ind_time})
+#
+#         data = sorted(data, key=lambda x: (data[x]['manual'], data[x]['score'], data[x]['time']),reverse=True)
+#
+#         return Response({'status': 'Success', 'data': data}, status=200)
 
 
 class SearchAndUpdateAPIView(APIView):

@@ -213,7 +213,6 @@ class TranslateStringView(views.APIView):
 #
 #         return Response({'status': 'Success', 'data': data}, status=200)
 
-
 class SearchAndUpdateAPIView(APIView):
     def post(self, request):
 

@@ -100,8 +100,8 @@ translation_area.addEventListener('keyup',function translate(e) {
         }
         console.log("tt=",tt);
 
-        document.getElementById('hindi_words_list').style.left=startPosition*5.25+400+'px';
-        document.getElementById('hindi_words_list').style.top=(tt*20)+250+'px';
+        document.getElementById('hindi_words_list').style.left=startPosition*5.25+405+'px';
+        document.getElementById('hindi_words_list').style.top=(tt*20)+330+'px';
 
 
 

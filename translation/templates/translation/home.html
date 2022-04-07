@@ -4,7 +4,7 @@
 {% block style %}
 
 body {
-  background-color: #E6E6FA;
+background-color: white;
 }
 
 .loader {
@@ -27,65 +27,197 @@ animation: spin 2s linear infinite;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
+
+
+#grad2 {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+#grad3 {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #d7e1ec 0%, #d7e1ec 100%);
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+#grad4 {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);
+}
+div.ex1 {
+  width: 1020px;
+  margin: auto;
+}
+p.pgrad2{
+color:white;
+font-size:300%;
+<!--text-align:left;-->
+
+}
+p.pgrad3{
+color:black;
+text-align:left;
+font-size:300%;
+}
+
+    .file-input label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, #13547a, #80d0c7);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+.fileUpload {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+
+    .button-input label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, #13547a, #80d0c7);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+.btnUpload {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+  bottom:53%;
+
+}
+
+.file-input
+{
+width:250px;
+height:50px;
+margin-left: 50%;
+margin-top: 20px;
+}
+.button-input
+{
+width:250px;
+height:50px;
+align:right;
+}
+
+.button-71 {
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  left:800px;
+  bottom:53px;
+    bottom:30px;
+  display: inline-block;
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  outline: 0;
+  padding: 16px 21px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-71:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  transition: all .3s;
+  width: 92%;
+}
+
+.button-71:hover {
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .button-71 {
+    padding: 16px 48px;
+  }
+}
+
+p.trans-text{
+color:white;
+font-size:250%;
+margin-left:10%;
+
+}
+select{
+        color:#13547a;
+}
+ option {
+        color: #13547a;
+    }
+option:hover {
+      background-color: #80d0c7;
+    }
+option:checked {
+  box-shadow: 0 0 10px 100px #80d0c7 inset;
+}
+
+
+
 {% endblock %}
 
 
 {% block main_content %}
+<!--<nav class="navbar navbar-dark bg-custom-2">-->
+<!--        <a class="navbar-brand" href="#a">Easy Hindi Typing</a>-->
+<!--    </nav>-->
+<!--<br>-->
+<!--    <nav class="navbar navbar-dark bg-custom-3">-->
+<!--        <a class="navbar-brand" href="#a" style="color:black;">Hindi <span style='font-size:50px;'>&#8594;</span> हिन्दी</a>-->
+<!--    </nav>-->
+
+<div id="grad2" style="text-align:center;"><p class="pgrad2">Easy Hindi Typing</p></div>
+<br>
+<div id="grad3" style="text-align:center;"><p class="pgrad3" style="margin-left:10%;">Hindi <span style='font-size:50px;'>&#8594;</span> हिन्दी</p></div>
+
 <div class="container">
 
-    <div style="text-align:center">
-        <div class="maia-aux">
-            <h1>
-                <a href="/">Transliteration</a>
-            </h1>
-        </div>
-    </div>
-    <div style="background: #325da7;
-    background: -moz-linear-gradient(top,#4e78c2,#325da7);
-    background: -webkit-linear-gradient(top,#4e78c2,#325da7);
-    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#4e78c2),color-stop(1,#325da7));
-    background: linear-gradient(top,#4e78c2,#325da7);
-    color: #fff;
-    padding: 0 15px;" class="maia-nav" id="maia-nav-x" role="navigation">
-        <div class="maia-aux">
-            <center>
-                <ul>
-                    <a href="/">
-                        <li style="color:white">Home</li>
-                    </a>
-                    <span class="tab"></span>
-                    <a href="/">
-                        <li style="color:white">Try it out
-                        </li>
-                    </a>
-                    <span class="tab"></span>
-                    <a href="/">
-                        <li style="color:white">On Translation
-                        </li>
-                    </a>
-                    <span class="tab"></span>
-                    <a href="/">
-                        <li style="color:white">On Translation Services</li>
-                    </a>
-                </ul>
-            </center>
-        </div>
-    </div>
-    <br>
-    <hr>
+
+
+
     <div class="editor-toolbar">
-        <div class="editor-langs goog-inline-block goog-menu-button" id="gt-sl" tabindex="0" role="listbox"
-             aria-expanded="false" aria-haspopup="true" style="user-select: none;" aria-activedescendant=":g3">
-            <div class="goog-inline-block goog-menu-button-outer-box">
-                <div class="goog-inline-block goog-menu-button-inner-box">
-                    <div class="goog-inline-block goog-menu-button-caption" id=":g3" role="option" aria-selected="true"
-                         aria-setsize="131" aria-posinset="44">
-                        <center>English to Hindi Transliteration</center>
-                    </div>
-                    <div class="goog-inline-block goog-menu-button-dropdown">&nbsp;</div>
-                </div>
-            </div>
-        </div>
+
         <span class="editor-methods" id="itaControl"><div><span class="ita-kd-inputtools-div"><div
                 class="goog-container goog-container-vertical" tabindex="-1" style="user-select: none;"><a
                 class="ita-kd-icon-button ita-kd-inputtool-icon ita-kd-small ita-kd-left ita-kd-selected" role="button"
@@ -99,7 +231,11 @@ animation: spin 2s linear infinite;
         <div class="goog-inline-block goog-flat-menu-button goog-flag-menu-button-focus" id="editor-cp-button"
              tabindex="0">
             <div class="editor-cp-img"></div>
-            <center>Write here</center>
+            <p style="margin-bottom:20px">&nbsp&nbsp&nbsp&nbsp &nbsp &nbspapp kaise hai? <span style='font-size:30px;'>&#8594;</span> आप कैसे है?
+                &nbsp &nbsp | &nbsp&nbsp Namaskar aap yaha par hindi me likhiye <span
+                        style='font-size:30px;'>&#8594;</span> नमस्कार आप यहाँ पर हिंदी में लिखिए &nbsp&nbsp |
+                &nbsp&nbsp Type below and convert text <span style='font-size:30px;'>&#8594;</span> टाइप बिलो एंड
+                कन्वर्ट टेक्स्ट </p>
         </div>
     </div>
 
@@ -107,30 +243,45 @@ animation: spin 2s linear infinite;
     <!--<form action="{% url 'http://127.0.0.1:8000" method="GET">-->
     <!--</form>-->
     <div class="container">
-        <center><textarea id="translation_area" placeholder="यहाँ टाइप करें ... (e.g Aap kasai hai)"
-                          style="line-height: 1.5em; height: 300px ;font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
-        </center>
+        <center>
+<textarea id ="translation_area" placeholder="यहाँ टाइप करें ... (e.g Aap kasai hai)" style="line-height: 1.5em; height: 300px ;font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
+</center>
 
-        <div id="hindi_words_list" style="position:absolute">
+    </div>
+    <div id="hindi_words_list" style="position:absolute">
         </div>
-        <!--        ;left: 450px; top: 235px;-->
 
+    <div id="grad4" class="ex1" style="border:1px solid black">
+        <div>
+            <p class="trans-text" style="margin-top:15px;">Transliterate in bulk?</p>
+        </div>
+    <div class="file-input">
+    <input type="file" id="fileUpload" class="fileUpload">
+    <label for="fileUpload" style="bottom:140%;left:15%;">Select file</label>
+    </div>
+        <button class="button-71" id="btnUpload" role="button" style="bottom:126%">Convert File</button>
 
+<!--        <button id="btnUpload" class="btn btn-primary">Upload Files</button>-->
     </div>
 
 
 </div>
 
+
+
+
 <!--<input id="csrf-token" value="{% csrf_token %}">-->
-<div id="ll">
+
+<!--<div id="ll">-->
+<!--    <center>-->
+<!--        <input required type="file" id="fileUpload">-->
+<!--        <button id="btnUpload" class="btn btn-primary">Upload Files</button>-->
+<!--    </center>-->
+<!--</div>-->
+
 <center>
-    <input required type="file" id="fileUpload">
-    <button id="btnUpload" class="btn btn-primary">Upload Files</button>
+    <div id="lll" class="loader" style="display:none"></div>
 </center>
-</div>
-
-
-<center><div id="lll" class="loader" style="display:none"></div></center>
 
 
 {% endblock %}

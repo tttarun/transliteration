@@ -213,12 +213,27 @@ const btnUpload = document.getElementById("btnUpload");
 //var filename=document.getElementById('filename').value;
 //console.log(filename)
 
-btnUpload.addEventListener("click", function(){
+//btnUpload.addEventListener("click", function(){
+////input.addEventListener('change', () => {
+//    uploadFile(input.files[0],input.files[0].name);
+//    document.getElementById('lll').style.display='block';
+//
+//});
+
+const input1 = document.getElementById('fileUploa');
+const btnUploa = document.getElementById("btnUploa");
+//var filename=document.getElementById('filename').value;
+//console.log(filename)
+
+btnUploa.addEventListener("click", function(){
 //input.addEventListener('change', () => {
-    uploadFile(input.files[0]);
+    uploadFile(input1.files[0],input1.files[0].name);
     document.getElementById('lll').style.display='block';
 
 });
+
+
+
 
 
 function getCookie(name) {
@@ -238,11 +253,11 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-const uploadFile = (file) => {
+const uploadFile = (file,name) => {
 
     // add file to FormData object
     const fd = new FormData();
-    fd.append('f_name','filename');
+    fd.append('f_name',name);
     fd.append('uploaded_file', file);
     // send `POST` request
     fetch('/upload', {
@@ -259,18 +274,38 @@ const uploadFile = (file) => {
 
     var a = document.createElement("a");
     a.href = window.URL.createObjectURL(data);
-    a.download = "translated_file";
+    a.download = input1.files[0].name;
     a.click();
     document.getElementById('lll').style.display='none';
     window.location.reload();
 //    document.getElementById('fileUpload').value= null;
 //    document.elementFromPoint('100px','100px').click();
-//       document.getElementById("ll").innerHTML.window.location.reload();
+//    document.getElementById("ll").innerHTML.window.location.reload();
 
     }
     )
     .catch(err => console.error(err));
 };
+
+
+document.getElementById("fileUploa").onchange = function(e) {
+const input1 = document.getElementById('fileUploa');
+document.getElementById('left_col2').innerHTML=add3Dots(input1.files[0].name,20);
+
+}
+
+
+function add3Dots(string, limit)
+{
+  var dots = "...";
+  if(string.length > limit)
+  {
+    // you can also use substr instead of substring
+    string = string.substring(0,limit) + dots;
+  }
+
+    return string;
+}
 
 
 

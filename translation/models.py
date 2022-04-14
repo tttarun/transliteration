@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
@@ -90,3 +91,13 @@ class myuploadfile(models.Model):
 
     def __str__(self):
         return self.f_name
+
+class review(models.Model):
+
+    rating=models.IntegerField()
+    comment=models.TextField(max_length=500)
+
+    def __str__(self):
+        return str(self.rating)+ " " + self.comment
+
+

@@ -13,6 +13,7 @@ from .models import (
     MLRequest,
     EnglishToHindiTranslation,
     myuploadfile,
+    review,
 )
 from .serializers import (
     MLAlgorithmSerializer,
@@ -35,7 +36,7 @@ from openpyxl.writer.excel import save_virtual_workbook
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadSerializer
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.core.files import File
 from .forms import MyuploadfileForm
 from django.core.cache import cache
@@ -276,6 +277,13 @@ class send_files(views.APIView):
         # return Response({"status": "Success", "data": 'my name is sandeep kumar kohli'}, status=200)
 
 
+class reviewandcomment(views.APIView):
+
+    def post(self,request):
+        rating=request.POST.get("rating")
+        comment=request.POST.get("comment")
+        review(rating=rating,comment=comment).save()
+        return redirect('/')
 
 
 #

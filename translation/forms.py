@@ -1,8 +1,14 @@
 from django import forms
 
-from .models import myuploadfile
+from .models import myuploadfile,review
 
 class MyuploadfileForm(forms.ModelForm):
     class Meta:
         model=myuploadfile
-        fields="__all__"
+        fields = "__all__"
+
+
+
+
+
+

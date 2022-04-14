@@ -10,6 +10,7 @@ from .views import (
     Home,
     ExcelFileTranslate,
     send_files,
+    reviewandcomment,
 )
 from rest_framework import routers
 from . import views
@@ -29,4 +30,5 @@ urlpatterns = [
     path("v1/translation/update", SearchAndUpdateAPIView.as_view()),
     path("v1/exceltranslate/", ExcelFileTranslate.as_view()),
     path("upload", send_files.as_view(), name="uploads"),
+    path("review", reviewandcomment.as_view(),name="review"),
 ]

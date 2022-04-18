@@ -106,10 +106,12 @@ translation_area.addEventListener('keyup',function translate(e) {
 
 
         document.getElementById('hindi_words_list').style.display='block';
-        var str = '<select id="translation_options_dropdown" onclick="change_hindi()" onkeypress="change_hindi()">';
+        var str = '<select id="translation_options_dropdown" onkeyup="close_drop(event)">';
        for (let i = 0; i < list.length; i++)
        { str += '<option>'+ list[i] + '</option>';}
         str += '</select>';
+
+
 
         var el=document.getElementById("translation_area");
 
@@ -125,6 +127,17 @@ translation_area.addEventListener('keyup',function translate(e) {
         var dropdown = document.getElementById("translation_options_dropdown");
         dropdown.focus();
         dropdown.size = dropdown.options.length;
+//        close_drop();
+
+//        close_dropdown();
+//
+//        var drop=document.getElementById("translation_options_dropdown");
+//
+//        drop.addEventListener('keypress',function translate(e) {
+//
+//        var text_focus = document.getElementById("translation_area");
+//        text_focus.focus();
+//}
 
 
         if (eng_len>list[1].length)
@@ -143,6 +156,13 @@ translation_area.addEventListener('keyup',function translate(e) {
         text_focus.focus();
         }
 
+        var drop=document.getElementById("translation_options_dropdown");
+
+        drop.addEventListener('keyup',function translate(e) {
+
+        console.log('yes i am working');
+        });
+
 
 }catch(err)
 {
@@ -151,6 +171,28 @@ translation_area.addEventListener('keyup',function translate(e) {
 }
 
 });
+
+
+
+
+function close_drop(event)
+{
+        var drop=document.getElementById("translation_options_dropdown");
+        let unicode= event.which;
+        if (unicode==8)
+        {
+        var text_focus = document.getElementById("translation_area");
+        text_focus.focus();
+        document.getElementById('hindi_words_list').style.display='none';
+
+        }else if(unicode==13)
+        {
+        change_hindi();
+        }else
+        {
+        console.log('chill i am working')
+        }
+}
 
 
 //function change_hindi() {
@@ -164,8 +206,18 @@ translation_area.addEventListener('keyup',function translate(e) {
 //
 //
 //};
+//var drop=document.getElementById("translation_options_dropdown");
+//
+//drop.addEventListener('keypress',function translate(e) {
+//
+//    var text_focus = document.getElementById("translation_area");
+//    text_focus.focus();
+//}
+
 
 function change_hindi() {
+
+
 
     var x = document.getElementById("translation_options_dropdown").value;
     const textarea = document.getElementById('translation_area');

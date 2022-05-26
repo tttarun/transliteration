@@ -93,6 +93,7 @@ DATABASES = {
         "HOST": config("DB_HOST"),
         "PORT": config("DB_PORT"),
     }
+
 }
 
 # Password validation

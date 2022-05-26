@@ -21,3 +21,14 @@ class AdminEnglishHindi(admin.ModelAdmin):
 
 
 admin.site.register(EnglishToHindiTranslation, AdminEnglishHindi)
+
+
+
+
+
+
+
+
+
+
+

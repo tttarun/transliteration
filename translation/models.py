@@ -1,8 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-
-# Create your models here.
 class Endpoint(models.Model):
     """
     Model to keep track of ML endpoints.
@@ -83,6 +81,21 @@ class EnglishToHindiTranslation(models.Model):
     def __str__(self):
         return self.english
 
+class EnglishToGujaratiTranslation(models.Model):
+    """
+    EnglishToGujaratiTranslation will contain key value pairs
+    of english to gujarati translation
+    Attributes:
+        english: The key/ word to be translated
+        gujarati: The value with all possible options of translation in json format
+    """
+
+    english = models.CharField(max_length=255)
+    gujarati = models.JSONField(blank=True)
+
+    def __str__(self):
+        return self.english
+
 
 class myuploadfile(models.Model):
     f_name = models.CharField(max_length=255)
@@ -99,5 +112,8 @@ class review(models.Model):
 
     def __str__(self):
         return str(self.rating)+ " " + self.comment
+
+
+
 
 

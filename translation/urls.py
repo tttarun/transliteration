@@ -11,10 +11,13 @@ from .views import (
     ExcelFileTranslate,
     send_files,
     reviewandcomment,
+    Gujarati,
+    Hindi,
+    TranslateGujaratiStringView,
+    send_files_gujarati,
 )
 from rest_framework import routers
 from . import views
-
 
 router = DefaultRouter()
 router.register(r"endpoints", EndpointView, basename="endpoints")
@@ -27,8 +30,12 @@ urlpatterns = [
     path("v1/", include(router.urls)),
     path("v1/translate/<str:endpoint>/", TranslateView.as_view(), name="translate"),
     path("v1/translate", TranslateStringView.as_view(), name="translatestring"),
+    path("v1/translate_gujarati", TranslateGujaratiStringView.as_view(), name="translategujaratistring"),
     path("v1/translation/update", SearchAndUpdateAPIView.as_view()),
     path("v1/exceltranslate/", ExcelFileTranslate.as_view()),
     path("upload", send_files.as_view(), name="uploads"),
     path("review", reviewandcomment.as_view(),name="review"),
+    path("gujarati", Gujarati.as_view(), name="gujarati"),
+    path("hindi", Hindi.as_view(), name="hindi"),
+    path("uploadgujarati", send_files_gujarati.as_view(), name="uploadsgujarati"),
 ]

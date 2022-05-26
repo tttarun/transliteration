@@ -14,6 +14,7 @@ from .models import (
     EnglishToHindiTranslation,
     myuploadfile,
     review,
+    EnglishToGujaratiTranslation
 )
 from .serializers import (
     MLAlgorithmSerializer,
@@ -22,6 +23,8 @@ from .serializers import (
     PersonDataSerialzer,
 )
 from .machine_learning_models.translate_model import Translate
+from .machine_learning_models.translate_gujarati_model import Translate_Gujarati
+
 from rest_framework.response import Response
 from .authentication import APIAuthentication
 from django.shortcuts import get_object_or_404
@@ -48,6 +51,7 @@ from django.http import JsonResponse
 
 class Home(View):
     def get(self, request):
+        cache.clear()
         return render(request, "translation/home.html")
 
 
@@ -168,6 +172,54 @@ class TranslateStringView(views.APIView):
         return Response({'status': 'Success', 'data': data}, status=200)
 
 
+class TranslateGujaratiStringView(views.APIView):
+
+    def get(self, request):
+        word = request.query_params.get('query')
+        # print(word) # in word we are getting english word
+        data = {}
+        if cache.get(word):
+            data=cache.get(word)
+
+            # print(possible_match)
+        else:
+            possible_match = EnglishToGujaratiTranslation.objects.filter(english__iexact=word).first()
+            if possible_match is not None and possible_match.gujarati != {}:
+                data = possible_match.gujarati  #{'संदिप': 61, 'संदीप': 9615, 'सन्दीप': 414} getting this as data for every word
+                # print(data)
+                for i in data:
+                    # print(i) # in data[i] we are getting score and in i we are getting word
+                    if isinstance(data[i], int):
+                        ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
+                        score=data[i]
+                        data[i] = {'manual': False, 'score': score, 'time': ind_time}
+                if len(data) < 5:
+                    translate_obj = Translate_Gujarati()
+                    converted_word_array = translate_obj.eng_guj_translate(word)
+                    for i in converted_word_array:
+                        if len(data) >= 5:
+                            break
+                        if i in data.keys():
+                            continue
+                        else:
+                            data.__setitem__(i, {'manual': False, 'score': 10, 'time': ind_time})
+
+            else:
+                translate_obj = Translate_Gujarati()
+                converted_word_array = translate_obj.eng_guj_translate(word)
+
+                for i in range(len(converted_word_array)):
+                    if len(data) >= 5:
+                        break
+                    ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
+                    data.__setitem__(converted_word_array[i], {'manual': False, 'score': 10, 'time': ind_time})
+
+            data = sorted(data, key=lambda x: (data[x]['manual'], data[x]['score'], data[x]['time']),reverse=True)
+            cache.add(word,data)
+        return Response({'status': 'Success', 'data': data}, status=200)
+
+
+
 
 
 
@@ -277,6 +329,28 @@ class send_files(views.APIView):
         # return Response({"status": "Success", "data": 'my name is sandeep kumar kohli'}, status=200)
 
 
+class send_files_gujarati(views.APIView):
+    def post(self, request):
+        name = request.POST.get("f_name")
+        myfile = request.FILES["uploaded_file"]
+
+        print(name)
+        print(myfile)
+        translate_obj = Translate_Gujarati()
+
+        translated_data = translate_obj.excel_english_to_hindi(myfile)
+        now = datetime.now()
+        translated_data.to_excel("media/{}_{}.xlsx".format(name, now), index=False)
+        myuploadfile(
+            f_name=name,
+            uploaded_file=myfile,
+            translated_file="{}_{}.xlsx".format(name, now),
+        ).save()
+
+        response = FileResponse(open("media/{}_{}.xlsx".format(name, now), "rb"))
+        return response
+
+
 class reviewandcomment(views.APIView):
 
     def post(self,request):
@@ -284,6 +358,16 @@ class reviewandcomment(views.APIView):
         comment=request.POST.get("comment")
         review(rating=rating,comment=comment).save()
         return redirect('/')
+
+class Gujarati(View):
+    def get(self, request):
+        cache.clear()
+        return render(request, "translation/gujarati.html")
+
+class Hindi(View):
+    def get(self, request):
+        cache.clear()
+        return render(request, "translation/hindi.html")
 
 
 #

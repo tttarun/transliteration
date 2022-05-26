@@ -1,0 +1,732 @@
+{% extends 'translation/base_gujarati.html' %}
+{% block title %}Home{% endblock %}
+
+{% block style %}
+
+body {
+background-color: white;
+}
+
+.loader {
+border: 16px solid #f3f3f3;
+border-radius: 50%;
+border-top: 16px solid #3498db;
+width: 120px;
+height: 120px;
+-webkit-animation: spin 2s linear infinite; /* Safari */
+animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+
+#grad2 {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+#grad3 {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #d7e1ec 0%, #d7e1ec 100%);
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+#grad4 {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);
+}
+
+#flex {
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);
+}
+
+div.ex1 {
+  width: 1020px;
+  margin: auto;
+}
+p.pgrad2{
+color:white;
+font-size:300%;
+<!--text-align:left;-->
+
+}
+p.pgrad3{
+color:black;
+text-align:left;
+font-size:300%;
+}
+
+<!--    .file-input label {-->
+<!--  display: block;-->
+<!--  position: relative;-->
+<!--  width: 200px;-->
+<!--  height: 50px;-->
+<!--  border-radius: 25px;-->
+<!--  background: linear-gradient(40deg, #13547a, #80d0c7);-->
+<!--  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);-->
+<!--  display: flex;-->
+<!--  align-items: center;-->
+<!--  justify-content: center;-->
+<!--  color: #fff;-->
+<!--  font-weight: bold;-->
+<!--  cursor: pointer;-->
+<!--  transition: transform .2s ease-out;-->
+<!--}-->
+.fileUpload {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+.fileUploa {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+
+<!--    .button-input label {-->
+<!--  display: block;-->
+<!--  position: relative;-->
+<!--  width: 200px;-->
+<!--  height: 50px;-->
+<!--  border-radius: 25px;-->
+<!--  background: linear-gradient(40deg, #13547a, #80d0c7);-->
+<!--  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);-->
+<!--  display: flex;-->
+<!--  align-items: center;-->
+<!--  justify-content: center;-->
+<!--  color: #fff;-->
+<!--  font-weight: bold;-->
+<!--  cursor: pointer;-->
+<!--  transition: transform .2s ease-out;-->
+<!--}-->
+.btnUpload {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+  bottom:53%;
+
+}
+
+.btnUpload2 {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+  bottom:53%;
+
+}
+
+.file-input
+{
+width:250px;
+height:50px;
+margin-left: 50%;
+margin-top: 20px;
+}
+.button-input
+{
+width:250px;
+height:50px;
+align:right;
+}
+
+<!--.button-71 {-->
+<!--  background-color: #0078d0;-->
+<!--  border: 0;-->
+<!--  border-radius: 56px;-->
+<!--  color: #fff;-->
+<!--  cursor: pointer;-->
+<!--  left:800px;-->
+<!--  bottom:53px;-->
+<!--    bottom:30px;-->
+<!--  display: inline-block;-->
+<!--  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;-->
+<!--  font-size: 18px;-->
+<!--  font-weight: 600;-->
+<!--  outline: 0;-->
+<!--  padding: 16px 21px;-->
+<!--  position: relative;-->
+<!--  text-align: center;-->
+<!--  text-decoration: none;-->
+<!--  transition: all .3s;-->
+<!--  user-select: none;-->
+<!--  -webkit-user-select: none;-->
+<!--  touch-action: manipulation;-->
+<!--}-->
+
+<!--.button-71:before {-->
+<!--  background-color: initial;-->
+<!--  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);-->
+<!--  border-radius: 125px;-->
+<!--  content: "";-->
+<!--  height: 50%;-->
+<!--  left: 4%;-->
+<!--  opacity: .5;-->
+<!--  position: absolute;-->
+<!--  top: 0;-->
+<!--  transition: all .3s;-->
+<!--  width: 92%;-->
+<!--}-->
+
+<!--.button-71:hover {-->
+<!--  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;-->
+<!--  transform: scale(1.05);-->
+<!--}-->
+
+.left_col:hover {
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+
+}
+
+
+.left_col {
+
+  display: inline-block;
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  text-align: center;
+  transition: all .3s;
+  -webkit-user-select: none;
+}
+
+<!--.left_col:before {-->
+
+<!--  border-radius: 125px;-->
+<!--  content: "";-->
+<!--  height: 50%;-->
+<!--  left: 4%;-->
+<!--  opacity: .5;-->
+<!--  position: absolute;-->
+<!--  top: 0;-->
+<!--  transition: all .3s;-->
+<!--  width: 92%;-->
+<!--}-->
+
+<!--.button-72:hover {-->
+<!--  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;-->
+<!--  transform: scale(1.05);-->
+<!--}-->
+
+@media (min-width: 768px) {
+  .button-72 {
+    padding: 16px 48px;
+  }
+}
+
+@media (min-width: 768px) {
+  .button-71 {
+    padding: 16px 48px;
+  }
+}
+
+p.trans-text{
+color:white;
+font-size:160%;
+margin-left:10%;
+
+}
+select{
+        color:#13547a;
+}
+ option {
+        color: #13547a;
+    }
+option:hover {
+      background-color: #80d0c7;
+    }
+option:checked {
+  box-shadow: 0 0 10px 100px #80d0c7 inset;
+}
+
+.flex-container {
+  display: flex;
+  align-items: stretch;
+  background-color: #f1f1f1;
+}
+
+.flex-container > div {
+  background-color: DodgerBlue;
+  color: white;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+
+.left_col{
+  width: 350px;
+  background-color: ;
+  overflow:hidden;
+  border-radius: 120px;
+  background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+}
+.left_col1{
+  width: 50px;
+  background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);
+}
+.left_col2
+{
+background-color: #FFFFFF;
+border: 1px dashed rgba(0, 0, 0, 0.5);
+box-sizing: border-box;
+border-radius: 9px;
+}
+
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+.footer-section {
+  background: #E0FFFF;
+<!--  background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);-->
+  position: relative;
+}
+.footer-cta {
+  border-bottom: 1px solid #373636;
+}
+.single-cta i {
+  color: #ff5e14;
+  font-size: 30px;
+  float: left;
+  margin-top: 8px;
+}
+.cta-text {
+  padding-left: 15px;
+  display: inline-block;
+}
+.cta-text h4 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.cta-text span {
+  color: #757575;
+  font-size: 15px;
+}
+.footer-content {
+  position: relative;
+  z-index: 2;
+}
+.footer-pattern img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 330px;
+  background-size: cover;
+  background-position: 100% 100%;
+}
+.footer-logo {
+  margin-bottom: 30px;
+}
+.footer-logo img {
+    max-width: 200px;
+}
+.footer-text p {
+  margin-bottom: 14px;
+  font-size: 14px;
+      color: #7e7e7e;
+  line-height: 28px;
+}
+.footer-social-icon span {
+  color: #fff;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+}
+.footer-social-icon a {
+  color: #fff;
+  font-size: 16px;
+  margin-right: 15px;
+}
+.footer-social-icon i {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+}
+.facebook-bg{
+  background: #3B5998;
+}
+.twitter-bg{
+  background: #55ACEE;
+}
+.google-bg{
+  background: #DD4B39;
+}
+.footer-widget-heading h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  position: relative;
+}
+.footer-widget-heading h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  height: 2px;
+  width: 50px;
+  background: #ff5e14;
+}
+.footer-widget ul li {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  margin-bottom: 12px;
+}
+.footer-widget ul li a:hover{
+  color: #ff5e14;
+}
+.footer-widget ul li a {
+  color: #878787;
+  text-transform: capitalize;
+}
+.subscribe-form {
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-form input {
+  width: 100%;
+  padding: 14px 28px;
+  background: white;
+  border: 1px solid #2E2E2E;
+  color: #fff;
+}
+.subscribe-form button {
+    position: absolute;
+    right: 0;
+    background: #00CED1;
+    padding: 13px 20px;
+    border: 1px solid #ff5e14;
+    top: 0;
+}
+.subscribe-form button i {
+  color: #fff;
+  font-size: 22px;
+  transform: rotate(-6deg);
+}
+.copyright-area{
+  background: #00CED1;
+  padding: 25px 0;
+}
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: white;
+}
+.copyright-text p a{
+  color: #ff5e14;
+}
+.footer-menu li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.footer-menu li:hover a{
+  color: #ff5e14;
+}
+.footer-menu li a {
+  font-size: 14px;
+  color: white;
+}
+
+
+{% endblock %}
+
+
+{% block main_content %}
+<!--<nav class="navbar navbar-dark bg-custom-2">-->
+<!--        <a class="navbar-brand" href="#a">Easy Hindi Typing</a>-->
+<!--    </nav>-->
+<!--<br>-->
+<!--    <nav class="navbar navbar-dark bg-custom-3">-->
+<!--        <a class="navbar-brand" href="#a" style="color:black;">Hindi <span style='font-size:50px;'>&#8594;</span> हिन्दी</a>-->
+<!--    </nav>-->
+
+{% load static %}
+
+<div id="grad2" style="text-align:center;"><p class="pgrad2">Easy Gujarati Typing</p></div>
+<br>
+<div id="grad3" style="text-align:center;"><a href="{% url 'hindi' %}" style="text-decoration:none;color:black;"><p class="pgrad3" style="margin-left:10%;">Hindi <span style='font-size:50px;'>&#8594;</span> हिन्दी</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" style="text-decoration:none;color:black;">Gujarati <span style='font-size:50px;'>&#8594;</span> ગુજરાતી</a></p></div>
+
+<div class="container">
+
+
+
+
+    <div class="editor-toolbar">
+
+        <span class="editor-methods" id="itaControl"><div><span class="ita-kd-inputtools-div"><div
+                class="goog-container goog-container-vertical" tabindex="-1" style="user-select: none;"><a
+                class="ita-kd-icon-button ita-kd-inputtool-icon ita-kd-small ita-kd-left ita-kd-selected" role="button"
+                tabindex="0" aria-label="Turn off Input Method" aria-pressed="true" style="user-select: none;"><span
+                class="ita-kd-img ita-kd-icon ita-kd-icon-span ita-icon-5" style="user-select: none;"></span></a><a
+                class="ita-kd-icon-button ita-kd-dropdown ita-kd-right" role="button" tabindex="0" aria-haspopup="true"
+                aria-label="Show the Input Tools menu" style="user-select: none;"><span
+                class="ita-kd-img ita-kd-arrow ita-kd-icon-span"
+                style="user-select: none;"></span></a></div></span></div></span>
+
+        <div class="goog-inline-block goog-flat-menu-button goog-flag-menu-button-focus" id="editor-cp-button"
+             tabindex="0">
+            <div class="editor-cp-img"></div>
+            <p style="margin-bottom:20px">&nbsp&nbsp&nbsp&nbsp &nbsp &nbspapp kaise hai? <span style='font-size:30px;'>&#8594;</span> એપ કૈસે હૈ?
+                &nbsp &nbsp | &nbsp&nbsp Namaskar aap yaha par gujarati me likhiye <span
+                        style='font-size:30px;'>&#8594;</span> નમસ્કાર આપ યહા પર ગુજરાતી મેં લિખિયે &nbsp&nbsp |
+                &nbsp&nbsp Type below and convert text <span style='font-size:30px;'>&#8594;</span> ટીપે બેલૉ તો કન્વર્ટ ટેક્સ્ટ</p>
+        </div>
+    </div>
+
+    <!--<textarea class="editor-box" id="demobox" dir="ltr"></textarea>-->
+    <!--<form action="{% url 'http://127.0.0.1:8000" method="GET">-->
+    <!--</form>-->
+    <div class="container">
+        <center>
+<textarea id ="translation_area" placeholder="યાહા પ્રકાર કરે ... (e.g Aap kasai hai)" style="line-height: 1.5em; height: 300px ;font-family: Arial, Helvetica, sans-serif; font-size: 14px;"></textarea>
+</center>
+
+    </div>
+    <div id="hindi_words_list" style="position:absolute">
+        </div>
+
+<!--    <div id="grad4" class="ex1" style="border:1px solid black">-->
+<!--        <div>-->
+<!--            <p class="trans-text" style="margin-top:30px;">Transliterate in bulk?</p>-->
+<!--        </div>-->
+<!--    <div class="file-input">-->
+<!--    <input type="file" id="fileUpload" class="fileUpload">-->
+<!--    <label for="fileUpload" style="bottom:140%;left:15%;">Select file</label>-->
+
+<!--    </div>-->
+<!--        <div style="position:absolute;">-->
+<!--        <p id="filename" style="margin-left:560%;margin-top: -63%;"></p>-->
+<!--            </div>-->
+<!--        <button class="button-71" id="btnUpload" role="button" style="bottom:125%">Convert File</button>-->
+
+<!--    </div>-->
+
+
+</div>
+<br>
+
+<div id="flex" class="ex1">
+<div class="flex-container" style="background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);">
+  <div class="left_col1" style="flex-basis:400px">Transliterate in bulk?</div>
+    <div class="left_col" style="flex-basis:200px;background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);cursor:pointer;"><input type="file" id="fileUploa" class="fileUpload">
+    <label for="fileUploa" style="bottom:140%;left:15%;cursor:pointer;">Select file</label></div>
+  <div class="left_col2" id="left_col2" style="flex-basis:200px;font-size:16px;background-color:#FFFFFF;color:black;">No File has Selected</div>
+  <div class="left_col" id="btnUploa" style="flex-basis:200px;background-image: linear-gradient(15deg, #0078d0 0%, #0078d0 100%);cursor:pointer;">Convert File</div>
+
+</div>
+    </div>
+
+<br>
+<!--<input id="csrf-token" value="{% csrf_token %}">-->
+
+<!--<div id="ll">-->
+<!--    <center>-->
+<!--        <input required type="file" id="fileUpload">-->
+<!--        <button id="btnUpload" class="btn btn-primary">Upload Files</button>-->
+<!--    </center>-->
+<!--</div>-->
+
+<center>
+    <div id="lll" class="loader" style="display:none"></div>
+</center>
+
+
+<!-- <center>-->
+<!--    <form action="{% url 'uploads' %}" onsubmit="submit_button()" method="POST" enctype="multipart/form-data">-->
+<!--        <input required type="text" name="filename"  placeholder="enter your file name" >-->
+<!--        <input required type="file" multiple name="uploadfiles" >-->
+<!--        {% csrf_token %}-->
+<!--        <button class="btn btn-primary" type="submit">Upload File</button>-->
+<!--    </form>-->
+<!-- </center>-->
+<br>
+<br>
+<div class="container" style="border:1px solid black;width:30%;background-image: linear-gradient(15deg, #55a7b9 0%, #80d0c7 100%);">
+    <center>
+    <form action="{% url 'review' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <h2 style="color:white">Give Reviews Below</h2>
+  <div class="w-50 p-3" class="form-group">
+    <label for="exampleInputEmail1">Rating</label>
+    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Rating" name="rating">
+    <small id="emailHelp" class="form-text text-muted">Give the rating here out of 10</small>
+  </div>
+  <div class="w-50 p-3" class="form-group">
+    <label for="exampleInputPassword1">Comment</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Comment Here" name="comment">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        </center>
+    </div>
+
+
+<!-- <center>-->
+<!--    <form action="{% url 'review' %}" method="POST" enctype="multipart/form-data">-->
+<!--        <input required type="number" name="rating"  placeholder="enter rating here" >-->
+<!--        <input required type="text" name="comment" >-->
+<!--        {% csrf_token %}-->
+<!--        <button class="btn btn-primary" type="submit">Upload File</button>-->
+<!--    </form>-->
+<!-- </center>-->
+
+
+
+<br><br><br>
+
+
+<footer class="footer-section">
+        <div class="container">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4 style="color:#00CED1">Find us</h4>
+                                <span>Jarvis Technology ,New Delhi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4 style="color:#00CED1">Call us</h4>
+                                <span>9876543210 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4 style="color:#00CED1">Mail us</h4>
+                                <span>contact@jarvis.consulting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="https://jarvis.consulting/"><img src="{% static 'images/jarvis.jpeg' %}" class="img-fluid" alt="logo"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>A leading technology and strategy consulting firm that formulates and implements data centric large scale political campaigns and government initiatives, working closely with major political parties and governments in India</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span  style="color:#00CED1">Follow us</span>
+                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3 style="color:#00CED1">Useful Links</h3>
+                            </div>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">about</a></li>
+                                <li><a href="#">services</a></li>
+                                <li><a href="#">portfolio</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Our Services</a></li>
+                                <li><a href="#">Expert Team</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Latest News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3 style="color:#00CED1">Subscribe</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address" style="color:black">
+                                    <button style="height:55px;"><i class="fab fa-telegram-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2022, All Right Reserved </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Policy</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}
+
+
+
+
+
+
+

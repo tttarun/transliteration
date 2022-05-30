@@ -105,6 +105,14 @@ class myuploadfile(models.Model):
     def __str__(self):
         return self.f_name
 
+class myuploadgujaratifile(models.Model):
+    f_name = models.CharField(max_length=255)
+    uploaded_file = models.FileField(upload_to="",blank=False,null=False)
+    translated_file = models.FileField(upload_to="")
+
+    def __str__(self):
+        return self.f_name
+
 class review(models.Model):
 
     rating=models.IntegerField()

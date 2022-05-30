@@ -6,6 +6,7 @@ from .models import (
     EnglishToHindiTranslation,
     myuploadfile,
     review,
+    myuploadgujaratifile,
 )
 
 # Register your models here.
@@ -13,6 +14,7 @@ admin.site.register(Endpoint)
 admin.site.register(MLAlgorithm)
 admin.site.register(MLRequest)
 admin.site.register(myuploadfile)
+admin.site.register(myuploadgujaratifile)
 admin.site.register(review)
 
 

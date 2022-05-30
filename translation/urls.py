@@ -15,6 +15,8 @@ from .views import (
     Hindi,
     TranslateGujaratiStringView,
     send_files_gujarati,
+    UpdateHindiScoreAPIView,
+    UpdateGujaratiScoreAPIView,
 )
 from rest_framework import routers
 from . import views
@@ -38,4 +40,6 @@ urlpatterns = [
     path("gujarati", Gujarati.as_view(), name="gujarati"),
     path("hindi", Hindi.as_view(), name="hindi"),
     path("uploadgujarati", send_files_gujarati.as_view(), name="uploadsgujarati"),
+    path("uploadhindiscore", UpdateHindiScoreAPIView.as_view(), name="uploadhindiscore"),
+    path("uploadgujaratiscore", UpdateGujaratiScoreAPIView.as_view(), name="uploadgujaratiscore"),
 ]

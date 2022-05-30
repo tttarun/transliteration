@@ -225,6 +225,7 @@ function change_hindi() {
     var sp=s.split(' ');
     var hin_len=x.length;
 
+
     var select = document.getElementById('translation_options_dropdown'),
     opts = select.getElementsByTagName('option'),
     x_list = [];
@@ -234,6 +235,9 @@ function change_hindi() {
         }
 
     dict[x]=x_list;
+
+    var english=x_list[0];
+    var gujarati=x;
 
 
     if(sp[sp.length-1].startsWith('\n'))
@@ -247,6 +251,13 @@ function change_hindi() {
       textarea.value = replaceRange(textarea.value, gs-eng_len, gs, x);
 
     }
+
+    fetch(`/uploadgujaratiscore?english=${english}&gujarati=${gujarati}`)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log('ERROR'));
+    console.log('i am startig to fetch from api');
+
 
     document.getElementById('hindi_words_list').style.display='none';
     var text_focus = document.getElementById("translation_area");

@@ -14,7 +14,8 @@ from .models import (
     EnglishToHindiTranslation,
     myuploadfile,
     review,
-    EnglishToGujaratiTranslation
+    EnglishToGujaratiTranslation,
+    myuploadgujaratifile,
 )
 from .serializers import (
     MLAlgorithmSerializer,
@@ -155,7 +156,7 @@ class TranslateStringView(views.APIView):
                         if i in data.keys():
                             continue
                         else:
-                            data.__setitem__(i, {'manual': False, 'score': 10, 'time': ind_time})
+                            data.__setitem__(i, {'manual': False, 'score': 0, 'time': ind_time})
 
             else:
                 translate_obj = Translate()
@@ -165,7 +166,7 @@ class TranslateStringView(views.APIView):
                     if len(data) >= 5:
                         break
                     ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M')
-                    data.__setitem__(converted_word_array[i], {'manual': False, 'score': 10, 'time': ind_time})
+                    data.__setitem__(converted_word_array[i], {'manual': False, 'score': 0, 'time': ind_time})
 
             data = sorted(data, key=lambda x: (data[x]['manual'], data[x]['score'], data[x]['time']),reverse=True)
             cache.add(word,data)
@@ -272,9 +273,7 @@ class SearchAndUpdateAPIView(APIView):
         data = request.data
 
         for key in data:
-            record = EnglishToHindiTranslation.objects.filter(
-                english__iexact=key
-            ).first()
+            record = EnglishToHindiTranslation.objects.filter(english__iexact=key).first()
             if record:
                 record.hindi = data[key]
                 record.save()
@@ -286,6 +285,78 @@ class SearchAndUpdateAPIView(APIView):
         return Response(
             {"status": "Success", "message": "Saved Successfully"}, status=200
         )
+
+from django.utils.encoding import uri_to_iri
+
+class UpdateHindiScoreAPIView(APIView):
+
+    def get(self, request):
+
+        english=request.query_params.get('english')
+        hind=request.query_params.get('hindi')
+        print(english)
+        print(hind)
+        record = EnglishToHindiTranslation.objects.filter(english__iexact=english).first()
+        print(type(record))
+        if record:
+            print('record is running')
+
+            for x in record.hindi:
+                if x==hind:
+                    if record.hindi[x]<0:
+                        record.hindi[x]=0
+                    record.hindi[x]=int(record.hindi[x])+1
+                else:
+                    if record.hindi[x]<=0:
+                        record.hindi[x]=0
+                    else:
+                        record.hindi[x]=int(record.hindi[x])-1
+            record.save()
+        else:
+            print('record is not running')
+            dict={}
+            dict[hind]=10
+            EnglishToHindiTranslation.objects.create(english=english,hindi=dict)
+
+        return Response(
+            {"status": "Success", "message": "Saved Successfully"}, status=200
+        )
+
+class UpdateGujaratiScoreAPIView(APIView):
+
+    def get(self, request):
+
+        english=request.query_params.get('english')
+        gujarati=request.query_params.get('gujarati')
+        print(english)
+        print(gujarati)
+        record = EnglishToGujaratiTranslation.objects.filter(english__iexact=english).first()
+
+        if record:
+
+            for x in record.gujarati:
+                if x==gujarati:
+                    if record.gujarati[x]<0:
+                        record.gujarati[x]=0
+                    record.gujarati[x]=int(record.gujarati[x])+1
+                else:
+                    if record.gujarati[x]<=0:
+                        record.gujarati[x]=0
+                    else:
+                        record.gujarati[x]=int(record.gujarati[x])-1
+
+            record.save()
+        else:
+            dict = {}
+            dict[gujarati] = 10
+            print('English is below')
+            print(english)
+            EnglishToGujaratiTranslation.objects.create(english=english, gujarati=dict)
+
+        return Response(
+            {"status": "Success", "message": "Saved Successfully"}, status=200
+        )
+
 
 
 class ExcelFileTranslate(views.APIView):
@@ -341,7 +412,7 @@ class send_files_gujarati(views.APIView):
         translated_data = translate_obj.excel_english_to_hindi(myfile)
         now = datetime.now()
         translated_data.to_excel("media/{}_{}.xlsx".format(name, now), index=False)
-        myuploadfile(
+        myuploadgujaratifile(
             f_name=name,
             uploaded_file=myfile,
             translated_file="{}_{}.xlsx".format(name, now),

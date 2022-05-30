@@ -235,6 +235,8 @@ function change_hindi() {
 
     dict[x]=x_list;
 
+    var english=x_list[0];
+    var hindi=x;
 
     if(sp[sp.length-1].startsWith('\n'))
     {
@@ -247,6 +249,12 @@ function change_hindi() {
       textarea.value = replaceRange(textarea.value, gs-eng_len, gs, x);
 
     }
+
+    fetch(`/uploadhindiscore?english=${english}&hindi=${hindi}`)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log('ERROR'));
+
 
     document.getElementById('hindi_words_list').style.display='none';
     var text_focus = document.getElementById("translation_area");

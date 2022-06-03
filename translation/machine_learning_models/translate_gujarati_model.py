@@ -1268,7 +1268,7 @@ class Translate_Gujarati:
                 else []
             )
 
-            df1[column + "_Hindi"] = df1[["BM_split", column]].apply(
+            df1[column + "_Gujarati"] = df1[["BM_split", column]].apply(
                 lambda x: tran(*x), axis=1
             )
             del df1["BM_split"]

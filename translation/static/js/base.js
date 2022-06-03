@@ -92,15 +92,15 @@ translation_area.addEventListener('keyup',function translate(e) {
 //        window.hin_len=l.length
         window.eng_len=list[0].length
         var tt=0;
-        if (startPosition >185)
+        if (startPosition >167)
         {
-        tt=Math.floor(startPosition/185);
-        startPosition=startPosition%185;
+        tt=Math.floor(startPosition/167);
+        startPosition=startPosition%167;
 
         }
         console.log("tt=",tt);
 
-        document.getElementById('hindi_words_list').style.left=startPosition*5.25+405+'px';
+        document.getElementById('hindi_words_list').style.left=startPosition*5.25+410+'px';
         document.getElementById('hindi_words_list').style.top=(tt*20)+330+'px';
 
 
@@ -289,6 +289,10 @@ btnUploa.addEventListener("click", function(){
 //input.addEventListener('change', () => {
     uploadFile(input1.files[0],input1.files[0].name);
     document.getElementById('lll').style.display='block';
+//    const button = document.getElementById('fileUploa');
+//    button.disabled = true;
+    document.getElementById("fileUploadDiv").style.pointerEvents = "none";
+    document.getElementById("btnUploa").style.pointerEvents = "none";
 
 });
 

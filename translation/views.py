@@ -298,20 +298,30 @@ class UpdateHindiScoreAPIView(APIView):
         print(hind)
         record = EnglishToHindiTranslation.objects.filter(english__iexact=english).first()
         print(type(record))
+
+
         if record:
             print('record is running')
 
-            for x in record.hindi:
-                if x==hind:
-                    if record.hindi[x]<0:
-                        record.hindi[x]=0
-                    record.hindi[x]=int(record.hindi[x])+1
-                else:
-                    if record.hindi[x]<=0:
-                        record.hindi[x]=0
+            if hind in record.hindi:
+
+                for x in record.hindi:
+                    if x==hind:
+                        if record.hindi[x]<0:
+                            record.hindi[x]=0
+                        record.hindi[x]=int(record.hindi[x])+1
                     else:
-                        record.hindi[x]=int(record.hindi[x])-1
-            record.save()
+                        if record.hindi[x]<=0:
+                            record.hindi[x]=0
+                        else:
+                            record.hindi[x]=int(record.hindi[x])-1
+                record.save()
+
+            elif len(record.hindi)<5:
+                record.hindi[hind]=10
+                record.save()
+
+
         else:
             print('record is not running')
             dict={}
@@ -334,18 +344,24 @@ class UpdateGujaratiScoreAPIView(APIView):
 
         if record:
 
-            for x in record.gujarati:
-                if x==gujarati:
-                    if record.gujarati[x]<0:
-                        record.gujarati[x]=0
-                    record.gujarati[x]=int(record.gujarati[x])+1
-                else:
-                    if record.gujarati[x]<=0:
-                        record.gujarati[x]=0
+            if gujarati in record.gujarati:
+                for x in record.gujarati:
+                    if x==gujarati:
+                        if record.gujarati[x]<0:
+                            record.gujarati[x]=0
+                        record.gujarati[x]=int(record.gujarati[x])+1
                     else:
-                        record.gujarati[x]=int(record.gujarati[x])-1
+                        if record.gujarati[x]<=0:
+                            record.gujarati[x]=0
+                        else:
+                            record.gujarati[x]=int(record.gujarati[x])-1
 
-            record.save()
+                record.save()
+
+            elif len(record.gujarati)<5:
+                record.hindi[gujarati]=10
+                record.save()
+
         else:
             dict = {}
             dict[gujarati] = 10
